@@ -2,10 +2,12 @@ FROM ubuntu:latest
 
 RUN apt-get update
 
-RUN apt-get -y install nginx<<< $'6\n44\n'
+RUN $'6\n44\n' | apt-get -y install nginx 
 
 COPY default /etc/nginx/sites-available/default
 
-EXPOSE 80/tcp
+EXPOSE 80
+
+# CMD ["nginx" "-g" "daemon off;"]
 
 CMD ["service","nginx","start"]
